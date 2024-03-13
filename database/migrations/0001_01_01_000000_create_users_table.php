@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone')->unique()->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -24,6 +24,31 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('online')->nullable();
+
+            // из user_naturals:
+            $table->string('lastname')->nullable();
+            $table->string('nickname')->unique()->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birthday')->nullable();
+            $table->string('blog_link')->nullable();
+            $table->string('video_link')->nullable();
+            $table->integer('blogger')->nullable();
+            $table->integer('photographer')->nullable();
+            $table->integer('guide')->nullable();
+            $table->text('about')->nullable();
+            $table->text('socials')->nullable();
+
+            // из user_countries:
+            $table->string('country')->nullable();
+
+            // из user_notifications:
+            $table->integer('telegram_enable')->nullable();
+            $table->string('telegram')->nullable();
+            $table->integer('email_enable')->nullable();
+            $table->integer('travel_enable')->nullable();
+            $table->integer('event_enable')->nullable();
+            $table->integer('help_enable')->nullable();
+            $table->integer('message_enable')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
