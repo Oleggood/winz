@@ -13,15 +13,49 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Pluralizer;
 
-Route::get('/{locale}', function (string $locale) {
-    if (! in_array($locale, ['en', 'ru',])) {
-        abort(400);
-    }
+//todo:
+//Route::group(['middleware' => ['auth', 'admin']], function () {
+//    Route::get('/clear', function () {
+//        Artisan::call('cache:clear');
+//        Artisan::call('config:cache');
+//        Artisan::call('view:clear');
+//        Artisan::call('route:clear');
+//        return "Кэш очищен.";
+//    });
+//});
 
-    $xxx = App::setLocale($locale);
-    dd($xxx);
-    //так установить префикс!
+
+
+//todo - локализация - заменить 'prefix' => 'ru'
+//Route::get('/{locale}', function (string $locale) {
+//    if (! in_array($locale, ['en', 'ru',])) {
+//        $locale = 'ru';
+//    }
+//
+//   App::setLocale($locale);
+////    код сюда
+//});
+
+//todo:
+//Auth::routes(['verify' => false]);
+
+
+Route::group(['prefix' => 'ru'], function () {
+    Route::get('/', [Front\PageController::class, 'home'])->name('home');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

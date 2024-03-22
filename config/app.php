@@ -40,7 +40,8 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
+//    todo - для прод - заменить на false!!!
 
     /*
     |--------------------------------------------------------------------------
@@ -83,16 +84,15 @@ return [
     |
     */
 
-    'locale' => 'ru',
-    'locales' => ['en', 'ru'],
-    'langs' => [
-        'ru' => 'Рус',
-        'en' => 'Eng',
-    ],
+//    'locale' => 'ru',
+//    'locales' => ['en', 'ru'],
+//    'langs' => [
+//        'ru' => 'Рус',
+//        'en' => 'Eng',
+//    ],
 
 //    стоковые:
-//    'locale' => env('APP_LOCALE', 'en'),
-//
+    'locale' => env('APP_LOCALE', 'ru'),
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'ru'),
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
