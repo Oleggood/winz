@@ -10,23 +10,24 @@ class PageController extends Controller
 {
     public function home()
     {
-        $events = Event::visible()
-            ->public()
-            ->coming()
-            ->active()
-            ->orderBy('start', 'asc')
-            ->withTransports()
-            ->withTargets()
-            ->withTravels()
-            ->take(15)
-            ->get();
-        $data = [
-            'is_home' => true,
-            'events' => $events,
-            'title' => __('seo.event_title'),
-            'description' => __('seo.hp_description')
-        ];
-        return view('front.index', $data);
+//        $events = Event::visible()
+//            ->public()
+//            ->coming()
+//            ->active()
+//            ->orderBy('start', 'asc')
+//            ->withTransports()
+//            ->withTargets()
+//            ->withTravels()
+//            ->take(15)
+//            ->get();
+//        $data = [
+//            'is_home' => true,
+//            'events' => $events,
+//            'title' => __('seo.event_title'),
+//            'description' => __('seo.hp_description')
+//        ];
+//        return view('front.index', $data);
+        return view('welcome');
     }
 
     public function page($url)

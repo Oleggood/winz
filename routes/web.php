@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Pluralizer;
+use Inertia\Inertia;
 
 //todo:
 //Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -40,12 +41,15 @@ use Illuminate\Support\Pluralizer;
 //Auth::routes(['verify' => false]);
 
 
-Route::group(['prefix' => 'ru'], function () {
-    Route::get('/', [Front\PageController::class, 'home'])->name('home');
-});
+//Route::group(['prefix' => 'ru'], function () {
+//    Route::get('/', [Front\PageController::class, 'home'])->name('home');
+//});
 
 
 
+Route::get('ex', [function() {
+    return Inertia::render('Ex');
+}]);
 
 
 
