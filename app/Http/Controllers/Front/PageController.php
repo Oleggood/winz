@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 class PageController extends Controller
 {
@@ -27,7 +30,14 @@ class PageController extends Controller
 //            'description' => __('seo.hp_description')
 //        ];
 //        return view('front.index', $data);
-        return view('welcome');
+
+
+        $proba = [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+        ];
+
+        return Inertia::render('Front/Index', $proba);
     }
 
     public function page($url)
@@ -53,6 +63,6 @@ class PageController extends Controller
 //            'description' => $page->texts->meta_description,
 //        ];
 //        return view('front.page', $data);
-        dd('222');
+        return Inertia::render('Front/Page');
     }
 }

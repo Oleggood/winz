@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Back;
 use App\Http\Controllers\Front;
+use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\RoleAdminMiddleware;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Pluralizer;
 use Inertia\Inertia;
+use Illuminate\Foundation\Application;
+
 
 //todo:
 //Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -24,7 +28,6 @@ use Inertia\Inertia;
 //        return "Кэш очищен.";
 //    });
 //});
-
 
 
 //todo - локализация - заменить 'prefix' => 'ru'
@@ -41,54 +44,75 @@ use Inertia\Inertia;
 //Auth::routes(['verify' => false]);
 
 
-//Route::group(['prefix' => 'ru'], function () {
-//    Route::get('/', [Front\PageController::class, 'home'])->name('home');
-//});
+Route::group(['prefix' => 'ru'], function () {
 
 
-
-Route::get('ex', [function() {
-    return Inertia::render('Ex');
-}]);
+    Route::get('/', [Front\PageController::class, 'home'])->name('home'); //главная - без авторизации
+    Route::get('/info/{url}', [Front\PageController::class, 'page']); //без авторизации (о проекте)
 
 
+    //были после развертывания пустого проекта - стоковые laravel:
+//    Route::get('/', function () {
+//        return Inertia::render('Welcome', [
+//            'canLogin' => Route::has('login'),
+//            'canRegister' => Route::has('register'),
+//            'laravelVersion' => Application::VERSION,
+//            'phpVersion' => PHP_VERSION,
+//        ]); // сток
+//    });
 
 
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->middleware([
+        'auth',
+//        'verified'
+    ])->name('dashboard'); // сток
 
 
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit'); // сток
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); // сток
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); // сток
+
+        //Back:
+        //Admin:
+        Route::middleware([RoleAdminMiddleware::class])->prefix('win-admin')->group(function () {
+            Route::get('/users', function () {
+                return 'юзерс - CRUD для админа, модернизировать и использовать имеющиеся? + добавить index, show';
+            });
+            Route::get('/travels', function () {
+                return Inertia::render('Back/Admin/Travels/List');
+            });
+        });
+        //Admin/
+        //Back/
 
 
+        //Front
+
+        //Front/
+
+    });
 
 
+//конец стоковых laravel
 
 
-
-
-//были после развертывания пустого проекта laravel:
-
-//use App\Http\Controllers\ProfileController;
-//use Illuminate\Foundation\Application;
-//use Illuminate\Support\Facades\Route;
-//use Inertia\Inertia;
-
-//Route::get('/', function () {
-//    return Inertia::render('Welcome', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//});
-//
-//
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
-//
-//Route::middleware('auth')->group(function () {
-//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-//});
-
+});
 require __DIR__ . '/auth.php';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
