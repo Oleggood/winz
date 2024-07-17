@@ -62,12 +62,12 @@ Route::group(['prefix' => 'ru'], function () {
 //    });
 
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->middleware([
-        'auth',
-//        'verified'
-    ])->name('dashboard'); // сток
+//    Route::get('/dashboard', function () {
+//        return Inertia::render('Dashboard');
+//    })->middleware([
+//        'auth',
+////        'verified'
+//    ])->name('dashboard'); // сток
 
 
     Route::middleware('auth')->group(function () {
@@ -81,15 +81,24 @@ Route::group(['prefix' => 'ru'], function () {
             Route::get('/users', function () {
                 return 'юзерс - CRUD для админа, модернизировать и использовать имеющиеся? + добавить index, show';
             });
-            Route::get('/travels', function () {
-                return Inertia::render('Back/Admin/Travels/List');
-            });
+            Route::resource('/travels', Back\TravelController::class); //полный CRUD маршрутов админа
+
+
         });
         //Admin/
         //Back/
 
 
         //Front
+        Route::resource('/travels', Front\TravelController::class); //полный CRUD маршрутов полз-ей
+
+        Route::get('/chats', [Front\ChatController::class, 'index'])->name('chats.index');
+        Route::post('/chats', [Front\ChatController::class, 'store'])->name('chats.store');
+        Route::get('/chats/{chat}', [Front\ChatController::class, 'show'])->name('chats.show');
+
+        Route::post('/messages', [Front\MessageController::class, 'store'])->name('messages.store');
+        Route::patch('/message_statuses', [Front\MessageStatusController::class, 'update'])->name('message_statuses.update');
+
 
         //Front/
 

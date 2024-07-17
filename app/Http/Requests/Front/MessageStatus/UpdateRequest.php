@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Front\Message;
+namespace App\Http\Requests\Front\MessageStatus;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,11 +22,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'chat_id' => 'required|integer|exists:chats,id',
-            'text' => 'required|string',
-            'user_ids' => 'required|array',
-            'user_ids.*' => 'required|integer|exists:users,id',
-
+            'message_id' => 'required|integer|exists:messages,id',
+            'user_id' => 'required|integer|exists:users,id',
         ];
     }
 }

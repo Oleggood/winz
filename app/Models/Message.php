@@ -12,33 +12,28 @@ class Message extends Model
      *  1- группа события
      *  2- пользователь
      */
-    use HasFactory;
+//    use HasFactory;
 
-    protected $fillable = [
-        'author_id',
-        'target_id',
-        'target_type',
-        'text',
-        'read'
-    ];
+    protected $guarded = false;
+    protected $table = 'messages';
 
-    protected $appends = [
-        'created_formatted',
-        'is_my'
-    ];
+//    protected $appends = [
+//        'created_formatted',
+//        'is_my'
+//    ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function getCreatedFormattedAttribute()
+    public function getTimeAttribute()
     {
-        return $this->created_at->format('d.m.Y H:i');
+        return $this->created_at->diffForHumans();
     }
 
-    public function getIsMyAttribute()
+    public function getIsOwnerAttribute()
     {
-        return $this->author_id == Auth::user()->id;
+        return (int) $this->user_id === (int) Auth::user()->id;
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Resources\Front\Chat\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MessageResource extends JsonResource
+class MessageToOthersResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -26,7 +26,7 @@ class MessageResource extends JsonResource
             'text' => $this->text,
             'read' => $this->read,
             'time' => $this->time,
-            'is_owner' => $this->is_owner,
+            'is_owner' => false,
         ];
     }
 }

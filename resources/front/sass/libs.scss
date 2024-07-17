@@ -9,8 +9,9 @@ $error: #e55353;
 $success:#42b400;
 $disabled: #aaa;
 
-@import 'reset.css';
-@import '1140_flex.css';
+//@import 'reset.css';
+//@import '1140_flex.css';
+
 //@import '~sweetalert2/src/sweetalert2';
 //@import '~formstone/dist/css/tooltip.css';
 //@import '~formstone/dist/css/themes/light/dropdown.css';
@@ -23,7 +24,10 @@ $disabled: #aaa;
 //@import '~chosen-js/chosen.css';
 //@import '~vue-multiselect/dist/vue-multiselect.min.css';
 //@import '~vue2-datepicker/index.css';
-@import 'layout.scss';
+
+//@import 'layout.scss';
+
 //@import '~jquery-datetimepicker/build/jquery.datetimepicker.min.css';
-@import 'all.scss';
-@import 'media.scss';
+
+//@import 'all.scss';
+//@import 'media.scss';

@@ -33,7 +33,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+//        return redirect()->intended(route('dashboard', absolute: false)); //сток
+        return redirect()->intended(route('travels.index'));
     }
 
     /**
@@ -47,6 +48,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/ru/');
     }
 }

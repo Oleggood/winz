@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TravelController extends Controller
 {
@@ -12,7 +13,7 @@ class TravelController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Front/Travels/List');
     }
 
     /**
@@ -20,7 +21,7 @@ class TravelController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Front/Travels/Create');
     }
 
     /**

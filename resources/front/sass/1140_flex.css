@@ -12,10 +12,10 @@
     margin:0 auto;
     max-width:1920px;
 }
-.flex{
-    display:flex;
-    margin:0 -.4rem;
-}
+/*.flex{*/
+/*    display:flex;*/
+/*    margin:0 -.4rem;*/
+/*}*/
 .flex_5{
     margin:0 -.25rem;
 }

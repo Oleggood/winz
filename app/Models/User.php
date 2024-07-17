@@ -62,6 +62,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function chats()
+    {
+        return $this->belongsToMany(Chat::class, 'chat_user', 'user_id', 'chat_id');
+    }
+
 //    protected $appends = [
 //        'showname',
 //        'entity',

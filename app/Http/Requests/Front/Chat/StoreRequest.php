@@ -22,7 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'nullable|string',
+            'users' => 'required|array',
+            'users.*' => 'required|integer|exists:users,id',
         ];
     }
 }
